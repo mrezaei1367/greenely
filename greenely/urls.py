@@ -25,6 +25,7 @@ schema_view = get_swagger_view(title='flight API')
 urlpatterns = [
     url(r'^api/v1/auth/', include('authentication.urls')),
     url(r'^api/v1/users/', include('users.urls')),
+    url(r'^api/v1/consumption/', include('consumption.urls')),
     # url(r'^admin/', admin.site.urls),
     url(r'^api-token-verify/', verify_jwt_token),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
