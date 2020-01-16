@@ -1,11 +1,8 @@
-from django.conf.urls import url, include
-from rest_framework.routers import DefaultRouter
+from django.conf.urls import url
 from .views import DataViewSet
-
-# router = DefaultRouter()
-# router.register(r'', DataViewSet, base_name='flight')
+from .default_values import (DATA_API_PATH, LIMIT_API_PATH)
 
 urlpatterns = [
-    # url(r'^', include(router.urls)),
-    url(r'^data/$', DataViewSet.as_view()),
+    url(DATA_API_PATH, DataViewSet.as_view()),
+    url(LIMIT_API_PATH, DataViewSet.as_view()),
 ]

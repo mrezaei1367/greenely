@@ -14,9 +14,13 @@ class UserProfileView(GenericAPIView):
             serializer = UserProfileSerializer(user)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Exception as e:
-            errs = {'errors':
-                        [{'status': 400,
-                          'detail': str(e),
-                          'source': {'pointer': self.request.path}
-                          }]}
+            errs = {
+                'errors': [{
+                    'status': 400,
+                    'detail': str(e),
+                    'source': {
+                        'pointer': self.request.path
+                    }
+                }]
+            }
             return Response(errs, status.HTTP_400_BAD_REQUEST)

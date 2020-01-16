@@ -19,7 +19,6 @@ from greenely.default_values import PRODUCTION_ENVIRONMENT
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_ROOT)
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -27,13 +26,12 @@ BASE_DIR = os.path.dirname(PROJECT_ROOT)
 SECRET_KEY = '%ra*-ds5ep#jx!wvkfbmo&m=$x9dd9y=%v#zhwjipr)$^9pkh1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if PROJECT_ENV==PRODUCTION_ENVIRONMENT:
+if PROJECT_ENV == PRODUCTION_ENVIRONMENT:
     DEBUG = False
 else:
     DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 AUTH_USER_MODEL = 'users.User'
@@ -87,42 +85,43 @@ JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
 }
 
-
 SECURITY_AUTH_SERIALIZERS = {
-    'SECURITY_TOKEN_SERIALIZER': 'authentication.AUTH_SERIALIZERS.TOKEN_SERIALIZER',
+    'SECURITY_TOKEN_SERIALIZER':
+    'authentication.AUTH_SERIALIZERS.TOKEN_SERIALIZER',
 }
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
+    'DEFAULT_PERMISSION_CLASSES':
+    ('rest_framework.permissions.IsAuthenticated', ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ),
-    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
+    'DEFAULT_FILTER_BACKENDS':
+    ('django_filters.rest_framework.DjangoFilterBackend', )
 }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
@@ -137,7 +136,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
@@ -150,9 +148,7 @@ MEDIA_URL = '/media/'
 FILES_ROOT = BASE_DIR + '/files/'
 FILES_URL = '/files/'
 LOGGING_ROOT = BASE_DIR
-LOCALE_PATHS = (
-    BASE_DIR + "/locale",
-)
+LOCALE_PATHS = (BASE_DIR + "/locale", )
 LANGUAGES = [
     ('en', 'English'),
     # ('de', _('German')),
@@ -213,7 +209,8 @@ LOGGING = {
             'datefmt': '%Y-%m-%d %H:%M:%S'
         },
         'verbose': {
-            'format': '[%(asctime)s] %(levelname)s [%(name)s.%(funcName)s:%(lineno)d] %(message)s',
+            'format':
+            '[%(asctime)s] %(levelname)s [%(name)s.%(funcName)s:%(lineno)d] %(message)s',
             'datefmt': '%Y-%m-%d %H:%M:%S'
         },
     },
@@ -245,6 +242,5 @@ LOGGING = {
             'handlers': ['debug_logfile'],
             'level': 'DEBUG'
         },
-
     }
 }

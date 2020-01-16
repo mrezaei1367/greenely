@@ -9,10 +9,10 @@ class TokenByIPPayload(models.Model):
     The default authorization token model.
     """
     key = models.TextField("Key", max_length=300, primary_key=True)
-    user = models.OneToOneField(
-        settings.AUTH_USER_MODEL, related_name='auth_token',
-        on_delete=models.CASCADE, verbose_name="User"
-    )
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,
+                                related_name='auth_token',
+                                on_delete=models.CASCADE,
+                                verbose_name="User")
     created = models.DateTimeField("Created", auto_now_add=True)
 
     class Meta:

@@ -8,19 +8,15 @@ from users.models import User
 class SignupSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username',
-                  'password',
-                  're_password',
-                  'address',
-                  'mobile_number',
-                  'first_name',
-                  'last_name',
-                  'birth_date',
-                  'birth_place',
-                  'email']
+        fields = [
+            'username', 'password', 're_password', 'address', 'mobile_number',
+            'first_name', 'last_name', 'birth_date', 'birth_place', 'email'
+        ]
 
     email = serializers.CharField()
-    username = serializers.CharField(max_length=32, validators=[UniqueValidator(queryset=User.objects.all())])
+    username = serializers.CharField(
+        max_length=32,
+        validators=[UniqueValidator(queryset=User.objects.all())])
     password = serializers.CharField(min_length=8, write_only=True)
     re_password = serializers.CharField(min_length=8, write_only=True)
 
@@ -49,5 +45,6 @@ class LoginPassSerializer(serializers.Serializer):
             ValidationError('This user does not exist')
         user = UserModel.objects.get(username=username, enabled=True)
         assert user.is_active, ValidationError('This user is inactive')
-        assert user.check_password(password), ValidationError('password is wrong')
+        assert user.check_password(password), ValidationError(
+            'password is wrong')
         return user

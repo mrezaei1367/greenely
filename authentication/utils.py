@@ -13,9 +13,12 @@ def import_callable(path_or_callable):
         assert isinstance(path_or_callable, string_types)
         package, attr = path_or_callable.rsplit('.', 1)
         return getattr(import_module(package), attr)
+
+
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
-TokenModel = import_callable(getattr(settings, 'REST_AUTH_TOKEN_MODEL', DefaultTokenModel))
+TokenModel = import_callable(
+    getattr(settings, 'REST_AUTH_TOKEN_MODEL', DefaultTokenModel))
 
 
 def default_create_token(token_model, user):

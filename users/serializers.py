@@ -7,9 +7,5 @@ class UserProfileSerializer(ModelSerializer):
         model = User
         fields = [
             "id"
-            "username",
-            'address',
-            'mobile_number',
-            'first_name',
-            'last_name'
+            "username", 'address', 'mobile_number', 'first_name', 'last_name'
         ]
