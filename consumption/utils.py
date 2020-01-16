@@ -57,9 +57,59 @@ def make_errors_format(errors_lis, request_path):
     return errs
 
 
-def serialize_output(queryset):
+def serialize_data_output(queryset):
     output = {'data': []}
     for item in queryset:
         data_item = [item.timestamp.date(), item.consumption, item.temperature]
         output['data'].append(data_item)
+    return output
+
+
+def retrieve_limit(request):
+    user = request.user
+    output = {"limits": {}}
+    output["limits"]["months"] = {}
+    output["limits"]["months"]["timestamp"] = {}
+    output["limits"]["months"]["consumption"] = {}
+    output["limits"]["months"]["temperature"] = {}
+
+    output["limits"]["months"]["timestamp"]["minimum"] = months.objects.filter(
+        user_id=user.id).order_by('timestamp').first().timestamp.date()
+    output["limits"]["months"]["timestamp"]["maximum"] = months.objects.filter(
+        user_id=user.id).order_by('timestamp').last().timestamp.date()
+
+    output["limits"]["months"]["consumption"][
+        "minimum"] = months.objects.filter(
+            user_id=user.id).order_by('consumption').first().consumption
+    output["limits"]["months"]["consumption"][
+        "maximum"] = months.objects.filter(
+            user_id=user.id).order_by('consumption').last().consumption
+
+    output["limits"]["months"]["temperature"][
+        "minimum"] = months.objects.filter(
+            user_id=user.id).order_by('temperature').first().temperature
+    output["limits"]["months"]["temperature"][
+        "maximum"] = months.objects.filter(
+            user_id=user.id).order_by('temperature').last().temperature
+
+    output["limits"]["days"] = {}
+    output["limits"]["days"]["timestamp"] = {}
+    output["limits"]["days"]["consumption"] = {}
+    output["limits"]["days"]["temperature"] = {}
+
+    output["limits"]["days"]["timestamp"]["minimum"] = days.objects.filter(
+        user_id=user.id).order_by('timestamp').first().timestamp.date()
+    output["limits"]["days"]["timestamp"]["maximum"] = days.objects.filter(
+        user_id=user.id).order_by('timestamp').last().timestamp.date()
+
+    output["limits"]["days"]["consumption"]["minimum"] = days.objects.filter(
+        user_id=user.id).order_by('consumption').first().consumption
+    output["limits"]["days"]["consumption"]["maximum"] = days.objects.filter(
+        user_id=user.id).order_by('consumption').last().consumption
+
+    output["limits"]["days"]["temperature"]["minimum"] = days.objects.filter(
+        user_id=user.id).order_by('temperature').first().temperature
+    output["limits"]["days"]["temperature"]["maximum"] = days.objects.filter(
+        user_id=user.id).order_by('temperature').last().temperature
+
     return output

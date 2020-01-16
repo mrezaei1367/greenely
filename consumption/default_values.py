@@ -1,6 +1,8 @@
 RESOLUTION = 'resolution'
 START = 'start'
 COUNT = 'count'
+RESPONSE = 'response'
+ERROR_LOGGER = 'error_logger'
 DATA_API_PATH = r'^data/$'
 LIMIT_API_PATH = r'^limit/$'
 RESOLUTION_LIST = ['M', 'D']
