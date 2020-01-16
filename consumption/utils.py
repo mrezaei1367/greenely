@@ -55,3 +55,11 @@ def retrieve_data(request):
 def make_errors_format(errors_lis, request_path):
     errs = {'errors': errors_lis, 'source': {'pointer': request_path}}
     return errs
+
+
+def serialize_output(queryset):
+    output = {'data': []}
+    for item in queryset:
+        data_item = [item.timestamp.date(), item.consumption, item.temperature]
+        output['data'].append(data_item)
+    return output
