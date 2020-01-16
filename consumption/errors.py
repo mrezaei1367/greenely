@@ -1,0 +1,5 @@
+RESOLUTION_INVALID = "Resolution is incorrect"
+START_INVALID = "Start date is incorrect"
+COUNT_INVALID = "Count is incorrect"
+INPUT_DATA_NOT_COMPLETE = "The query params are not complete"
+SERVER_ERROR = "Internal server error"

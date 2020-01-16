@@ -89,7 +89,9 @@ class LoginByPasswordView(GenericAPIView):
     def login(self):
         self.user = self.serializer.validated_data
         if self.user.auth_token:
-            self.token = self.user.auth_token
+            self.user.auth_token.delete()
+            self.token = create_token(self.token_model, self.user,
+                                      self.serializer.context['request'])
         else:
             self.token = create_token(self.token_model, self.user,
                                       self.serializer.context['request'])
