@@ -69,17 +69,12 @@ Also there are the list of all API with the related input in http://127.0.0.1:80
 ```sh
 http://127.0.0.1:8000/api/v1/auth/signup/
 ```
-You can open sign up API in your browser then you will be see following page:
+You can open sign up API in your browser then you will be see a page that it's a very simple page to create a user.
 
-![swagger](http://s7.picofile.com/file/8385198950/Screen_Shot_2020_01_18_at_1_48_25_AM.png)
-
-It's a very simple page to create a user.
-
-Then click on login button in Swagger page and use the credential that you set for your user.This is the image of swagger API page:
-
-![swagger](http://s7.picofile.com/file/8385198476/Screen_Shot_2020_01_18_at_1_48_07_AM.png)
+Then click on login button on Swagger page and use your user credential. 
 
 In addition there is a postman collection in the root directory of project that is named _greenely.postman_collection.json_. So you can easily import this file to your postman application and see all of the API's.
+
 ## Tests
 
 To run the tests with virtual environment , `cd` into the directory where `manage.py` is:
