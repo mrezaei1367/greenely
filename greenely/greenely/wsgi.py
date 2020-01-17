@@ -8,8 +8,8 @@ https://docs.djangoproject.com/en/2.1/howto/deployment/wsgi/
 """
 
 import os
-from greenely.project_environment import PROJECT_ENV
-from greenely.default_values import (PRODUCTION_ENVIRONMENT,
+from .project_environment import PROJECT_ENV
+from .default_values import (PRODUCTION_ENVIRONMENT,
                                      DEVELOPMENT_ENVIRONMENT)
 
 from django.core.wsgi import get_wsgi_application
