@@ -6,7 +6,7 @@ from rest_framework.generics import GenericAPIView
 from .utils import (retrieve_data, make_errors_format, serialize_data_output,
                     retrieve_limit)
 from .errors import SERVER_ERROR
-from .default_values import RESPONSE, ERROR_LOGGER
+from .default_values import (RESPONSE, ERROR_LOGGER)
 
 error_logger = logging.getLogger(ERROR_LOGGER)
 

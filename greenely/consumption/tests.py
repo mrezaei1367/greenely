@@ -1,9 +1,7 @@
-import time
 from datetime import datetime, timedelta
 from django.urls import reverse
 from rest_framework import status
-from rest_framework.test import (APITestCase,
-                                 APIRequestFactory)
+from rest_framework.test import (APITestCase, APIRequestFactory)
 from .models import days, months
 
 
@@ -35,7 +33,9 @@ class Consumption_Data_Test(APITestCase):
 
         self.factory = APIRequestFactory()
         self.sign_up_url = reverse('signup')
-        response = self.client.post(self.sign_up_url, self.user_data, format='json')
+        response = self.client.post(self.sign_up_url,
+                                    self.user_data,
+                                    format='json')
         self.user_id = response.data["id"]
         self.token = 'JWT ' + response.data["token"]
         self.client.credentials(HTTP_AUTHORIZATION=self.token)
@@ -46,22 +46,28 @@ class Consumption_Data_Test(APITestCase):
         start = datetime.strptime(self.month_query_params["start"], '%Y-%m-%d')
         response = self.client.get(self.data_url, self.month_query_params)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data['data']), months.objects.filter(user_id=self.user_id,
-                                                                           timestamp__range=[start, start + timedelta(
-                                                                               days=int(self.month_query_params[
-                                                                                            "count"]) * 31)]).count())
+        self.assertEqual(
+            len(response.data['data']),
+            months.objects.filter(
+                user_id=self.user_id,
+                timestamp__range=[
+                    start, start +
+                    timedelta(days=int(self.month_query_params["count"]) * 31)
+                ]).count())
 
     def test_get_days_data_list(self):
         start = datetime.strptime(self.day_query_params["start"], '%Y-%m-%d')
         response = self.client.get(self.data_url, self.day_query_params)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data['data']),
-                         days.objects.filter(user_id=self.user_id,
-                                                timestamp__range=[start,
-                                                 start + timedelta(
-                                                     days=int(
-                                                         self.day_query_params[
-                                                             "count"]))]).count())
+        self.assertEqual(
+            len(response.data['data']),
+            days.objects.filter(
+                user_id=self.user_id,
+                timestamp__range=[
+                    start,
+                    start + timedelta(days=int(self.day_query_params["count"]))
+                ]).count())
+
     def test_get_data_list_without_token(self):
         self.client.credentials(HTTP_AUTHORIZATION="")
         response = self.client.get(self.data_url)
@@ -72,7 +78,7 @@ class Consumption_Data_Test(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_get_data_list_wrong_resolution(self):
-        self.month_query_params["resolution"]="T"
+        self.month_query_params["resolution"] = "T"
         response = self.client.get(self.data_url, self.month_query_params)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 

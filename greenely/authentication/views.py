@@ -9,7 +9,6 @@ from .utils import import_callable
 from .settings import TOKEN_CREATOR, TOKEN_SERIALIZER
 from .serializsers import SignupSerializer, LoginPassSerializer
 from .models import TokenByIPPayload
-from users.models import User
 
 create_token = import_callable(TOKEN_CREATOR)
 

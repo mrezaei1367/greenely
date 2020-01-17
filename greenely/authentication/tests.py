@@ -8,7 +8,9 @@ from authentication.models import TokenByIPPayload
 class AuthenticationTest(APITestCase):
     def setUp(self):
         # We want to go ahead and originally create a user.
-        self.test_user = User.objects.create_user(username='testuser', password='testpassword', email='test@yahoo.com')
+        self.test_user = User.objects.create_user(username='testuser',
+                                                  password='testpassword',
+                                                  email='test@yahoo.com')
         # URL for creating an account.
         self.sign_up_url = reverse('signup')
         # URL for log in
