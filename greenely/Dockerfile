@@ -12,6 +12,7 @@ ADD . /app
 RUN pip3 install uwsgi
 RUN pip3 install -r requirement.txt
 RUN python3 manage.py makemigrations
+RUN python manage.py collectstatic --no-input --clear
 EXPOSE 8181
 
 # run the command to start uWSGI

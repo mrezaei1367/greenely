@@ -21,12 +21,12 @@ from rest_framework_swagger.views import get_swagger_view
 from .default_values import (AUTH_API_URL, CONSUMPTION_API_URL,
                              SWAGGER_API_URL)
 
-schema_view = get_swagger_view(title='flight API')
+schema_view = get_swagger_view(title='greenely API')
 urlpatterns = [
     url(AUTH_API_URL, include('authentication.urls')),
     url(CONSUMPTION_API_URL, include('consumption.urls')),
     # url(r'^api-token-verify/', verify_jwt_token),
-    # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(SWAGGER_API_URL, schema_view)
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

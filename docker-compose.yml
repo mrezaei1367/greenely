@@ -6,6 +6,8 @@ services:
     build: ./greenely
     container_name: greenely
     restart: always
+    volumes:
+      - static_volume:/home/app/greenely/static
     environment:
       - APP_NAME=greenely
     expose:
@@ -15,5 +17,9 @@ services:
     build: ./nginx
     container_name: nginx
     restart: always
+    volumes:
+      - static_volume:/home/app/greenely/static
     ports:
       - "80:80"
+volumes:
+   static_volume:
