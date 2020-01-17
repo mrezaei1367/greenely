@@ -70,7 +70,6 @@ Then click on login button in Swagger page and use the credential that you set f
 To run the tests, `cd` into the directory where `manage.py` is:
 ```sh
 (greenelyEnv)$ python manage.py test authentication
-(greenelyEnv)$ python manage.py test greenely_plan
-(greenelyEnv)$ python manage.py test users
+(greenelyEnv)$ python manage.py test 
 ```
 

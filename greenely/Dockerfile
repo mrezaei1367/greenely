@@ -1,10 +1,18 @@
-FROM python:3.6
+# Use the Python3.8 image
+FROM python
 
-RUN mkdir /code
-WORKDIR /code
+# Set the working directory to /app
+WORKDIR /app
 
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirement.txt
+# Copy the current directory contents into the container at /app
+ADD . /app
 
+#RUN apk add uwsgi
+# Install the dependencies
+RUN pip3 install uwsgi
+RUN pip3 install -r requirement.txt
+RUN python3 manage.py makemigrations
+EXPOSE 8181
 
-COPY . .
+# run the command to start uWSGI
+CMD ["uwsgi","--ini", "greenely_uwsgi.ini"]
