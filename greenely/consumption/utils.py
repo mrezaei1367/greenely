@@ -18,7 +18,6 @@ def validate_data_inputs(resolution, start, count):
         errors.append(COUNT_INVALID)
     return errors, start
 
-
 def get_queryset(resolution, start, count, user):
 
     if resolution == DAY:
@@ -32,7 +31,6 @@ def get_queryset(resolution, start, count, user):
     else:
         queryset = False
     return queryset
-
 
 def retrieve_data(request):
     errors = []
@@ -51,11 +49,9 @@ def retrieve_data(request):
         return errors, queryset
     return errors, False
 
-
 def make_errors_format(errors_lis, request_path):
     errs = {'errors': errors_lis, 'source': {'pointer': request_path}}
     return errs
-
 
 def serialize_data_output(queryset):
     output = {'data': []}
@@ -72,44 +68,42 @@ def retrieve_limit(request):
     output["limits"]["months"]["timestamp"] = {}
     output["limits"]["months"]["consumption"] = {}
     output["limits"]["months"]["temperature"] = {}
-
-    output["limits"]["months"]["timestamp"]["minimum"] = months.objects.filter(
-        user_id=user.id).order_by('timestamp').first().timestamp.date()
-    output["limits"]["months"]["timestamp"]["maximum"] = months.objects.filter(
-        user_id=user.id).order_by('timestamp').last().timestamp.date()
-
-    output["limits"]["months"]["consumption"][
-        "minimum"] = months.objects.filter(
-            user_id=user.id).order_by('consumption').first().consumption
-    output["limits"]["months"]["consumption"][
-        "maximum"] = months.objects.filter(
-            user_id=user.id).order_by('consumption').last().consumption
-
-    output["limits"]["months"]["temperature"][
-        "minimum"] = months.objects.filter(
-            user_id=user.id).order_by('temperature').first().temperature
-    output["limits"]["months"]["temperature"][
-        "maximum"] = months.objects.filter(
-            user_id=user.id).order_by('temperature').last().temperature
-
+    if months.objects.filter(
+        user_id=user.id).count()>0:
+        output["limits"]["months"]["timestamp"]["minimum"] = months.objects.filter(
+            user_id=user.id).order_by('timestamp').first().timestamp.date()
+        output["limits"]["months"]["timestamp"]["maximum"] = months.objects.filter(
+            user_id=user.id).order_by('timestamp').last().timestamp.date()
+        output["limits"]["months"]["consumption"][
+            "minimum"] = months.objects.filter(
+                user_id=user.id).order_by('consumption').first().consumption
+        output["limits"]["months"]["consumption"][
+            "maximum"] = months.objects.filter(
+                user_id=user.id).order_by('consumption').last().consumption
+        output["limits"]["months"]["temperature"][
+            "minimum"] = months.objects.filter(
+                user_id=user.id).order_by('temperature').first().temperature
+        output["limits"]["months"]["temperature"][
+            "maximum"] = months.objects.filter(
+                user_id=user.id).order_by('temperature').last().temperature
     output["limits"]["days"] = {}
     output["limits"]["days"]["timestamp"] = {}
     output["limits"]["days"]["consumption"] = {}
     output["limits"]["days"]["temperature"] = {}
+    if days.objects.filter(
+        user_id=user.id).count()>0:
+        output["limits"]["days"]["timestamp"]["minimum"] = days.objects.filter(
+            user_id=user.id).order_by('timestamp').first().timestamp.date()
+        output["limits"]["days"]["timestamp"]["maximum"] = days.objects.filter(
+            user_id=user.id).order_by('timestamp').last().timestamp.date()
 
-    output["limits"]["days"]["timestamp"]["minimum"] = days.objects.filter(
-        user_id=user.id).order_by('timestamp').first().timestamp.date()
-    output["limits"]["days"]["timestamp"]["maximum"] = days.objects.filter(
-        user_id=user.id).order_by('timestamp').last().timestamp.date()
+        output["limits"]["days"]["consumption"]["minimum"] = days.objects.filter(
+            user_id=user.id).order_by('consumption').first().consumption
+        output["limits"]["days"]["consumption"]["maximum"] = days.objects.filter(
+            user_id=user.id).order_by('consumption').last().consumption
 
-    output["limits"]["days"]["consumption"]["minimum"] = days.objects.filter(
-        user_id=user.id).order_by('consumption').first().consumption
-    output["limits"]["days"]["consumption"]["maximum"] = days.objects.filter(
-        user_id=user.id).order_by('consumption').last().consumption
-
-    output["limits"]["days"]["temperature"]["minimum"] = days.objects.filter(
-        user_id=user.id).order_by('temperature').first().temperature
-    output["limits"]["days"]["temperature"]["maximum"] = days.objects.filter(
-        user_id=user.id).order_by('temperature').last().temperature
-
+        output["limits"]["days"]["temperature"]["minimum"] = days.objects.filter(
+            user_id=user.id).order_by('temperature').first().temperature
+        output["limits"]["days"]["temperature"]["maximum"] = days.objects.filter(
+            user_id=user.id).order_by('temperature').last().temperature
     return output
