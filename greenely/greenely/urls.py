@@ -25,7 +25,6 @@ schema_view = get_swagger_view(title='greenely API')
 urlpatterns = [
     url(AUTH_API_URL, include('authentication.urls')),
     url(CONSUMPTION_API_URL, include('consumption.urls')),
-    # url(r'^api-token-verify/', verify_jwt_token),
     url(r'^api-auth/',
         include('rest_framework.urls', namespace='rest_framework')),
     url(SWAGGER_API_URL, schema_view)

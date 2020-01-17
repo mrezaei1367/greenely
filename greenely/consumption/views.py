@@ -15,6 +15,10 @@ class DataView(GenericAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
+        """
+        This method use for get the queryset
+        :return: 
+        """
         errors, queryset = retrieve_data(self.request)
         if len(errors) == 0:
             return [], queryset
@@ -22,6 +26,12 @@ class DataView(GenericAPIView):
             return errors, False
 
     def get(self, request):
+        """
+            resolution -- A parameter with value "M" for month and "D" for day
+            start -- A  parameter that show a date like '2014-03-01'
+            count -- A parameter that is a number like 5
+            This method use for get all of current user data consumption based on the query parameter
+        """
         try:
             errors, queryset = self.get_queryset()
             if len(errors) == 0:
@@ -40,6 +50,11 @@ class LimitView(GenericAPIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
+        """
+        This method return the minimum and maximum consumption of current user
+        :param request: 
+        :return: 
+        """
         try:
             response = retrieve_limit(request)
             return Response(response, status.HTTP_200_OK)

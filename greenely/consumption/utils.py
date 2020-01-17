@@ -7,6 +7,13 @@ from .models import days, months
 
 
 def validate_data_inputs(resolution, start, count):
+    """
+    This method check the validation of query parameters
+    :param resolution: 
+    :param start: 
+    :param count: 
+    :return: 
+    """
     errors = []
     if resolution not in RESOLUTION_LIST:
         errors.append(RESOLUTION_INVALID)
@@ -20,6 +27,14 @@ def validate_data_inputs(resolution, start, count):
 
 
 def get_queryset(resolution, start, count, user):
+    """
+    This method make the queryset based on the user inputs
+    :param resolution: 
+    :param start: 
+    :param count: 
+    :param user: 
+    :return: 
+    """
 
     if resolution == DAY:
         queryset = days.objects.filter(
@@ -35,6 +50,11 @@ def get_queryset(resolution, start, count, user):
 
 
 def retrieve_data(request):
+    """
+    retrieve the data of the user consumption
+    :param request: 
+    :return: 
+    """
     errors = []
     resolution = request.GET.get(RESOLUTION)
     start = request.GET.get(START)
@@ -53,11 +73,22 @@ def retrieve_data(request):
 
 
 def make_errors_format(errors_lis, request_path):
+    """
+    Make a uniform error format for the bad requests
+    :param errors_lis: 
+    :param request_path: 
+    :return: 
+    """
     errs = {'errors': errors_lis, 'source': {'pointer': request_path}}
     return errs
 
 
 def serialize_data_output(queryset):
+    """
+    Make the output response based on requirements
+    :param queryset: 
+    :return: 
+    """
     output = {'data': []}
     for item in queryset:
         data_item = [item.timestamp.date(), item.consumption, item.temperature]
@@ -65,11 +96,12 @@ def serialize_data_output(queryset):
     return output
 
 
-def add_consumption_data(request):
-    pass
-
-
 def retrieve_limit(request):
+    """
+    Create limit response based on the requirements
+    :param request: 
+    :return: 
+    """
     user = request.user
     output = {"limits": {}}
     output["limits"]["months"] = {}

@@ -28,6 +28,13 @@ class SignupView(GenericAPIView):
         return ip
 
     def post(self, request, *args, **kwargs):
+        """
+        This method use for signup new user
+        :param request: 
+        :param args: 
+        :param kwargs: 
+        :return: 
+        """
         self.serializer = SignupSerializer(data=request.data)
         try:
             UserModel = get_user_model()
