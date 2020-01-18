@@ -14,26 +14,33 @@ You can setup with Docker or virtual environment.
 
 It's very simple, and you should run the below command inthe root directory which exist docker-compose.yml file:
 
+```sh
     docker-compose up
+```
     
 Now you can browse to http://127.0.0.1:8000 and use the API's.
 
 ### setup with  **virtual environment** 
 Create a virtual environment (with python 3) to install dependencies in and activate it:
 
+```sh
     sudo apt-get install python3-pip
-
+```
+    
 ##### Then install **virtualenv** using pip3
-
+```sh
     sudo pip3 install virtualenv 
+```
 
 ##### Now create a virtual environment 
-
+```sh
     virtualenv greenelyEnv 
+```
 
 ### Active your virtual environment:    
-    
+ ```sh  
     source greenelyEnv/bin/activate
+```
 
 Then install the dependencies so you should got to the directory that existed _manage.py_:
 
@@ -133,4 +140,14 @@ And also you can run the test with Docker:
 docker exec -it your_docker_container_id python manage.py test authentication
 docker exec -it your_docker_container_id python manage.py test consumption
 ```
+
+## Deployment
+After running the following command with docker:
+
+```sh
+    docker-compose up
+```
+You will have two docker images that you can put them on your production server and enjoy.
+
+
 
