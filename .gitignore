@@ -112,4 +112,6 @@ venv.bak/
 /greenely/error.log
 .idea/
 /greenely/consumption/migrations/
+greenely/authentication/migrations/
+greenely/users/migrations
 /greenely/static/
