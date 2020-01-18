@@ -56,20 +56,22 @@ And navigate to `http://127.0.0.1:8000/`.
 There are 4 API's and it's worth mentioning that there is a postman collection in the root directory of project that is named _**greenely.postman_collection.json**_. So you can easily import this file to your postman application and see all of the API's.
 However I put some description about the API's.
 
-####1- signup
+
+###1- signup
  You can easily open below url in your browser and fill the blanks to register a user and then get a JWT token (for the access to the others API's):
  
 ```sh
 http://127.0.0.1:8000/api/v1/auth/signup/
 ```
-####2- login
+
+###2- login
 If you signed up a user, you can get JWT token with your username and password with the following API. I should say that for the login api you can use your browser :
 
 ```sh
 http://127.0.0.1:8000/api/v1/auth/login/
 ```
 
-####3- data
+###3- data
 
 This Api uses for getting the consumption data of current user based on query parameters:
 
@@ -84,7 +86,8 @@ curl -X GET \
   'http://127.0.0.1:8000/api/v1/consumption/data/?start=2014-09-1&resolution=M&count=3 \
   -H 'Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJ1c2VybmFtZSI6IkFsaSIsImV4cCI6MTU3OTM4MTQxMCwiZW1haWwiOiJzZGZAeWFob28uY29tIiwiaXAiOiIxMjcuMC4wLjEifQ.JgRMQZcRazYnccGteZEttd0sEym8ZFvXN280mOjqNTY'
 ```
-####4- limit
+
+###4- limit
 This Api uses for getting the information of max and min consumption values of current user :
 
 ```sh
